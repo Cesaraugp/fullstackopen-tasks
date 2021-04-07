@@ -1,7 +1,9 @@
-const Hello = () => {
+const Hello = (props) => {
   return (
     <div>
-      <p>Hello world</p>
+      <p>
+        Hello world, My name is {props.name} and i'm {props.age} years old
+      </p>
     </div>
   );
 };
@@ -12,13 +14,13 @@ function App() {
   const b = 20;
   console.log("Hello from the Component ");
   return (
-    <div>
+    <>
       <p>Hello World, its {now.toString()} o'clock</p>
-      <Hello />
+      <Hello name="Cesar" age="20" />
       <p>
-        {a} plus {b} is {a + b}
+        {a} + {b} is {a + b}
       </p>
-    </div>
+    </>
   );
 }
 
