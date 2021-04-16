@@ -22,16 +22,14 @@ const Content = (props) => {
   );
 };
 const Total = (props) => {
+  const total = props.parts.reduce((s, p) => {
+    if (s.exercises) return s.exercises + p.exercises;
+    else return s + p.exercises;
+  });
+
   return (
     <p>
-      <b>
-        total of{" "}
-        {props.parts[0].exercises +
-          props.parts[1].exercises +
-          props.parts[2].exercises +
-          props.parts[3].exercises}{" "}
-        exercises
-      </b>
+      <b>total of {total} exercises</b>
     </p>
   );
 };
