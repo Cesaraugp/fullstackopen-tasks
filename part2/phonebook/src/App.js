@@ -10,8 +10,15 @@ const App = () => {
 
   const buttonSubmitHandler = (e) => {
     e.preventDefault();
-    setPersons([...persons, { name: newName }]);
-    setNewName("");
+    const alreadyHasName = persons.some(
+      (person) => person["name"].toLowerCase() === newName.toLowerCase()
+    );
+    if (!alreadyHasName) {
+      setPersons([...persons, { name: newName }]);
+      setNewName("");
+      return;
+    }
+    alert(`${newName.toLowerCase()} is already on the Phonebook`);
   };
 
   return (
