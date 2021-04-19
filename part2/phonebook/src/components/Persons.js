@@ -1,7 +1,7 @@
 import React from "react";
 const Person = ({ name, phone }) => {
   return (
-    <p key={name}>
+    <p>
       {name} {phone}
     </p>
   );
@@ -15,7 +15,13 @@ const Persons = ({ filter, persons }) => {
             person.name.toLowerCase().includes(filter) ||
             person.phone.toString().includes(filter)
           )
-            return <Person name={person.name} phone={person.phone} />;
+            return (
+              <Person
+                key={person.name}
+                name={person.name}
+                phone={person.phone}
+              />
+            );
           else return false;
         })}
       </>
@@ -24,7 +30,9 @@ const Persons = ({ filter, persons }) => {
   return (
     <>
       {persons.map((person) => {
-        return <Person name={person.name} phone={person.phone} />;
+        return (
+          <Person key={person.name} name={person.name} phone={person.phone} />
+        );
       })}
     </>
   );
