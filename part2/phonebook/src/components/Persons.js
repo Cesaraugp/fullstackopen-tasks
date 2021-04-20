@@ -16,11 +16,7 @@ const Persons = ({ filter, persons }) => {
             person.phone.toString().includes(filter)
           )
             return (
-              <Person
-                key={person.name}
-                name={person.name}
-                phone={person.phone}
-              />
+              <Person key={person.id} name={person.name} phone={person.phone} />
             );
           else return false;
         })}
@@ -31,7 +27,7 @@ const Persons = ({ filter, persons }) => {
     <>
       {persons.map((person) => {
         return (
-          <Person key={person.name} name={person.name} phone={person.phone} />
+          <Person key={person.id} name={person.name} phone={person.phone} />
         );
       })}
     </>
