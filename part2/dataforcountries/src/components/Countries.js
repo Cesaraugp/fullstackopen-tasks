@@ -1,6 +1,6 @@
 import React from "react";
 import SingleCountry from "./SingleCountry.js";
-import DetailedSingleCountry from "./CountryList";
+import DetailedSingleCountry from "./DetailedSingleCountry";
 
 let Countries = ({ countries, country, buttonHandler }) => {
   let matchingList;
