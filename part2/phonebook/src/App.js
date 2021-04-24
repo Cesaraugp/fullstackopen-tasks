@@ -3,6 +3,7 @@ import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import axios from "axios";
+import personsServices from "./services/persons";
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
@@ -45,10 +46,18 @@ const App = () => {
       );
 
     if (!alreadyHasName && !alreadyHasNumber) {
-      setPersons([...persons, { name: newName, phone: newPhone }]);
+      /* setPersons([...persons, { name: newName, phone: newPhone }]);
       setNewName("");
       setNewPhone("");
-      return;
+      return; */
+      personsServices
+        .saveNewPerson({ name: newName, phone: newPhone })
+        .then((response) => {
+          setPersons(persons.concat(response));
+          setNewName("");
+          setNewPhone("");
+          return;
+        });
     }
   };
 
