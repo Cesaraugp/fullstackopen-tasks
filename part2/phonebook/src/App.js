@@ -39,12 +39,26 @@ const App = () => {
       (person) => person["phone"].toString() === newPhone
     );
 
-    if (alreadyHasNumber || alreadyHasName)
-      alert(
-        `${
-          alreadyHasName ? newName.toLowerCase() : newPhone
-        } is already on the Phonebook`
+    if (alreadyHasNumber || alreadyHasName) {
+      if (alreadyHasNumber) {
+        alert(`The number ${newPhone} is already registered`);
+        return;
+      }
+      const isUpdate = window.confirm(
+        `¿${newName} is already registered on the phonebook, do you want to replace the old number with the new one?`
       );
+
+      if (isUpdate) {
+        const person = persons.find(
+          (p) => p.name.toLowerCase() === newName.toLowerCase()
+        );
+        const changedPerson = { ...person, phone: newPhone };
+        const { id } = person;
+        personsServices.updateNumber(id, changedPerson).then((data) => {
+          setPersons(persons.map((p) => (p.id !== id ? p : data)));
+        });
+      }
+    }
 
     if (!alreadyHasName && !alreadyHasNumber) {
       personsServices
