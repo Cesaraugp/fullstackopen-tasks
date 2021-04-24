@@ -4,8 +4,10 @@ import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import axios from "axios";
 import personsServices from "./services/persons";
+import Notification from "./components/Notification";
 
 const App = () => {
+  const [notification, setNotification] = useState();
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
@@ -64,6 +66,13 @@ const App = () => {
       personsServices
         .saveNewPerson({ name: newName, phone: newPhone })
         .then((response) => {
+          setNotification({
+            message: `Added ${newName}:${newPhone}`,
+            isError: false,
+          });
+          setTimeout(() => {
+            setNotification(null);
+          }, 3000);
           setPersons(persons.concat(response));
           setNewName("");
           setNewPhone("");
@@ -82,15 +91,27 @@ const App = () => {
       `¿are you sure you want to delete ${name}?`
     );
     if (isDelete) {
-      personsServices.deletePerson(id).then(() => {
-        setPersons(persons.filter((p) => p.id !== id));
-      });
+      personsServices
+        .deletePerson(id)
+        .then(() => {
+          setPersons(persons.filter((p) => p.id !== id));
+        })
+        .catch(() => {
+          setNotification({
+            message: `Information from ${name} has already been removed from the server`,
+            isError: true,
+          });
+          setTimeout(() => {
+            setNotification(null);
+          }, 3000);
+        });
     }
   };
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification props={notification} />
       <Filter handleOnChange={searchPersons} />
       <h2>Add a new</h2>
       <PersonForm
