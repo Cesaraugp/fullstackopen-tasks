@@ -1,11 +1,14 @@
 import { React, useState, useEffect } from "react";
 import Note from "./components/Note.js";
 import noteService from "../src/services/notes.js";
+import Notification from "./components/Notification.js";
+import Footer from "./components/Footer.js";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("a new note");
   const [showAll, setShowAll] = useState(true);
+  const [errorMessage, setErrorMessage] = useState();
 
   const hook = () => {
     noteService.getAll().then((response) => {
@@ -24,7 +27,15 @@ const App = () => {
         setNotes(notes.map((n) => (n.id !== id ? n : response)));
       })
       .catch((error) => {
-        alert(`We're sorry, the note "${note.content}" is not on the server`);
+        /* alert(`We're sorry, the note "${note.content}" is not on the server`); */
+
+        setErrorMessage(
+          `Note '${note.content}' was already removed from server`
+        );
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
+
         setNotes(notes.filter((n) => n.id !== id));
       });
   };
@@ -50,6 +61,7 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
+      <Notification message={errorMessage} />
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           Show {showAll ? "important" : "all"}
@@ -68,6 +80,7 @@ const App = () => {
         <input value={newNote} onChange={handleNoteChange} />
         <button type="submit">Save</button>
       </form>
+      <Footer></Footer>
     </div>
   );
 };
