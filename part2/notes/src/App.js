@@ -18,9 +18,15 @@ const App = () => {
     const note = notes.find((n) => id === n.id);
     const changedNote = { ...note, important: !note.important };
 
-    noteService.update(id, changedNote).then((response) => {
-      setNotes(notes.map((n) => (n.id !== id ? n : response)));
-    });
+    noteService
+      .update(id, changedNote)
+      .then((response) => {
+        setNotes(notes.map((n) => (n.id !== id ? n : response)));
+      })
+      .catch((error) => {
+        alert(`We're sorry, the note "${note.content}" is not on the server`);
+        setNotes(notes.filter((n) => n.id !== id));
+      });
   };
   const handleNoteChange = (event) => {
     setNewNote(event.target.value);
