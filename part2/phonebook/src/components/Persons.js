@@ -1,12 +1,14 @@
 import React from "react";
-const Person = ({ name, phone }) => {
+const Person = ({ id, name, phone, deletePerson }) => {
   return (
-    <p>
-      {name} {phone}
-    </p>
+    <div>
+      <p>
+        {name} {phone} <button onClick={() => deletePerson(id)}>Delete</button>
+      </p>
+    </div>
   );
 };
-const Persons = ({ filter, persons }) => {
+const Persons = ({ filter, persons, deletePersonsHandler }) => {
   if (filter !== "") {
     return (
       <>
@@ -16,7 +18,12 @@ const Persons = ({ filter, persons }) => {
             person.phone.toString().includes(filter)
           )
             return (
-              <Person key={person.id} name={person.name} phone={person.phone} />
+              <Person
+                id={person.id}
+                name={person.name}
+                phone={person.phone}
+                deletePerson={deletePersonsHandler}
+              />
             );
           else return false;
         })}
@@ -27,7 +34,13 @@ const Persons = ({ filter, persons }) => {
     <>
       {persons.map((person) => {
         return (
-          <Person key={person.id} name={person.name} phone={person.phone} />
+          <Person
+            key={person.id}
+            id={person.id}
+            name={person.name}
+            phone={person.phone}
+            deletePerson={deletePersonsHandler}
+          />
         );
       })}
     </>

@@ -62,6 +62,18 @@ const App = () => {
     setFilter(e.target.value.toLowerCase().trim());
   };
 
+  const deletePersonsHandler = (id) => {
+    const { name } = persons.find((p) => p.id === id);
+    const isDelete = window.confirm(
+      `¿are you sure you want to delete ${name}?`
+    );
+    if (isDelete) {
+      personsServices.deletePerson(id).then(() => {
+        setPersons(persons.filter((p) => p.id !== id));
+      });
+    }
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -74,7 +86,11 @@ const App = () => {
         buttonHandler={buttonSubmitHandler}
       />
       <h2>Numbers</h2>
-      <Persons filter={filter} persons={persons} />
+      <Persons
+        filter={filter}
+        persons={persons}
+        deletePersonsHandler={deletePersonsHandler}
+      />
       ...
     </div>
   );
