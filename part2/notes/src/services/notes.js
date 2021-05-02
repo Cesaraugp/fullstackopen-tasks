@@ -3,8 +3,6 @@ import axios from "axios";
 const baseUrl = "/api/notes/";
 
 const getAll = () => {
-  /* const request = axios.get(baseUrl);
-  return request.then((response) => response.data); */
   const request = axios.get(baseUrl);
   const nonExisting = {
     id: 10000,
