@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3001/persons";
+const baseUrl = "/api/persons/";
 
 const updateNumber = (id, changedPerson) => {
   const req = axios.put(`${baseUrl}/${id}`, changedPerson);
@@ -17,8 +17,6 @@ const deletePerson = (id) => {
   return req.then(() => {
     console.log("User sucessfully deleted");
   });
-
-  //const requets= axios.put(baseUrl,id);
 };
 
 const personsServices = {

@@ -14,9 +14,7 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   const hook = () => {
-    axios
-      .get("http://localhost:3001/persons")
-      .then((response) => setPersons(response.data));
+    axios.get("/api/persons/").then((response) => setPersons(response.data));
   };
   useEffect(hook, []);
 
