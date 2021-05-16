@@ -75,6 +75,16 @@ const App = () => {
           setNewName("");
           setNewPhone("");
           return;
+        })
+        .catch((error) => {
+          console.log(error.response.data.error);
+          setNotification({
+            message: error.response.data.error,
+            isError: true,
+          });
+          setTimeout(() => {
+            setNotification(null);
+          }, 3000);
         });
     }
   };

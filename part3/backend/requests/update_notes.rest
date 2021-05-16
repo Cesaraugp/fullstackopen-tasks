@@ -1,0 +1,8 @@
+PUT http://localhost:3001/api/notes/609137d7751474001582b2e5
+Content-Type: application/json
+
+{
+    "content":"a new note from herokuApp",
+    "important":"true",
+    "id":"609137d7751474001582b2e5"
+}
