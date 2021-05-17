@@ -7,6 +7,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "mongo": "node mongo.js",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rm -rf build && cd ../../part2/notes/ && npm run build --prod && cp -r build ../../part3/backend",
     "deploy": "git push heroku main",
@@ -23,6 +24,7 @@
     "mongoose": "^5.12.7"
   },
   "devDependencies": {
+    "eslint": "^7.26.0",
     "nodemon": "^2.0.7"
   }
 }
