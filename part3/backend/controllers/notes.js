@@ -67,4 +67,4 @@ const Note= require('../models/note');
       .catch((error) => next(error))
   })
 
-  module.exports=notesRouter:
+  module.exports=notesRouter;
