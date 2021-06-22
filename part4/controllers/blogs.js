@@ -6,13 +6,14 @@ blogsRouter.get('/', async (request, response) => {
     response.json(blogs);
 })
   
-  blogsRouter.post('/', (request, response) => {
+  blogsRouter.post('/', async (request, response) => {
+    if (!request.body.url && !request.body.title ) {
+      return response.status(400).json({
+        error: "content missing",
+      });
+    }
     const blog = new Blog(request.body)
-  
-    blog
-      .save()
-      .then(result => {
-        response.status(201).json(result)
-      })
+    const result=await blog.save();
+    response.status(201).json(result)
   })
   module.exports=blogsRouter;
