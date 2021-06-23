@@ -83,9 +83,16 @@ describe('Testing addition/removal of blogs',()=>{
 
     },20000)
 
-
-//Write a test that verifies that making an HTTP POST request to the /api/blogs url successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
-//Once the test is finished, refactor the operation to use async/await instead of promises.
+    test('update a blog likesAmount',async()=>{
+        const blogId= '5a422aa71b54a676234d17f8'
+        const newLikesAmount={likes: 3}
+        await api.put(`/api/blogs/${blogId}`).send(newLikesAmount);
+        
+        const response = await api.get("/api/blogs");
+        const { body: blogs } = response;
+        const contents = blogs.filter((r) => r.id ==='5a422aa71b54a676234d17f8');
+        expect(contents[0].likes).toEqual(3);
+    },20000)
 
 })
 
