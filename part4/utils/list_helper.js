@@ -27,7 +27,7 @@ const mostBlogs =(blogs)=>{
     blogs.forEach(el=>{
         const hasAuthor= blogAuthorsCount.find(x => x.author === el.author)
         if(hasAuthor){
-            const i= blogAuthorsCount.indexOf(hasAuthor)kk
+            const i= blogAuthorsCount.indexOf(hasAuthor)
             blogAuthorsCount[i]['blogs']+=1;
         }
         else{

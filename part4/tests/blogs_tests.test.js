@@ -74,6 +74,15 @@ describe('Testing addition/removal of blogs',()=>{
           expect(blogsAtEnd).toHaveLength(helper.initialBlogsList.length);
     })
 
+    test('delete a blog',async()=>{
+        const blogId= '5a422aa71b54a676234d17f8'
+        await api.delete(`/api/blogs/${blogId}`).expect(204);
+
+        const response = await api.get("/api/blogs/");
+        expect(response.body).toHaveLength(helper.initialBlogsList.length-1);
+
+    },20000)
+
 
 //Write a test that verifies that making an HTTP POST request to the /api/blogs url successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
 //Once the test is finished, refactor the operation to use async/await instead of promises.
