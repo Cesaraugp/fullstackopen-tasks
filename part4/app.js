@@ -6,6 +6,7 @@ const config = require('./utils/config');
 const logger= require('./utils/logger');
 const mongoUrl = config.MONGODB_URI;
 const blogsRouter= require('./controllers/blogs')
+const usersRouter= require('./controllers/users')
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).then(resp=>{
     logger.info('The connection has been succesfuly made');
@@ -15,6 +16,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, us
 app.use(cors())
 app.use(express.json())
 app.use('/api/blogs',blogsRouter)
+app.use('/api/users',usersRouter)
 
 
 module.exports=app;
