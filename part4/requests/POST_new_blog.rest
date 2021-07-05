@@ -2,7 +2,7 @@ POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-    "title": "What a wonderful ending",
+    "title": "AAAA",
     "author": "Cameron JesseNeo",
     "url": "https://google.ve",
     "likes": 30
