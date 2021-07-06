@@ -26,3 +26,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 part3/backend/.env
+part4/.env
+.env
