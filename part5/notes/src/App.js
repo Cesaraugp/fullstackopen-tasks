@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Note from "./components/Note";
 import Notification from "./components/Notification";
 import Footer from "./components/Footer";
@@ -19,6 +19,8 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const noteformRef = useRef();
+
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
       setNotes(initialNotes);
@@ -35,6 +37,7 @@ const App = () => {
   }, []);
 
   const addNote = (noteObject) => {
+    noteformRef.current.toggleVisibility();
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote));
     });
@@ -62,7 +65,9 @@ const App = () => {
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
   const handleLogin = async (event) => {
+    console.log("pre event");
     event.preventDefault();
+    console.log("post event");
     try {
       const user = await loginService.login({
         username,
@@ -74,6 +79,7 @@ const App = () => {
       setUsername("");
       setPassword("");
     } catch (exception) {
+      console.log(exception);
       setErrorMessage("Wrong Credentials");
       setTimeout(() => {
         setErrorMessage(null);
@@ -82,7 +88,7 @@ const App = () => {
   };
 
   const noteForm = () => (
-    <Togglable buttonLabel="new note">
+    <Togglable buttonLabel="new note" ref={noteformRef}>
       <NoteForm createNote={addNote} />
     </Togglable>
   );
