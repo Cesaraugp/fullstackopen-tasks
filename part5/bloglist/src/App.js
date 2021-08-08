@@ -91,10 +91,30 @@ const App = () => {
           .map((blog) => (blog.id !== id ? blog : returnedBlog))
           .sort((a, b) => b.likes - a.likes)
       );
+      setErrorMessage(`The blog ${returnedBlog.title} received a like `);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const removeBlog = async (id) => {
+    try {
+      const response = await blogService.remove(id);
+      setBlogs(
+        blogs.filter((blog) => blog.id !== id).sort((a, b) => b.likes - a.likes)
+      );
+      setErrorMessage(`A blog Has been DELETED`);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const newBlog = async (e, title, author, url) => {
     e.preventDefault();
 
@@ -123,7 +143,12 @@ const App = () => {
           {blogForm()}
           <h2>blogs</h2>
           {blogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} handleLike={likeBlog} />
+            <Blog
+              key={blog.id}
+              blog={blog}
+              handleLike={likeBlog}
+              handleRemove={removeBlog}
+            />
           ))}
         </div>
       )}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-const Blog = ({ blog, handleLike }) => {
+
+const Blog = ({ blog, handleLike, handleRemove }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -10,6 +11,11 @@ const Blog = ({ blog, handleLike }) => {
 
   const [allInfoVisible, setAllInfoVisible] = useState(false);
   const toggleVisible = () => setAllInfoVisible(!allInfoVisible);
+  const removeBlog = () => {
+    if (window.confirm(`Remove Blog ${blog.title} by ${blog.author}`)) {
+      handleRemove(blog.id);
+    }
+  };
   return (
     <div style={blogStyle}>
       {blog.title} - {blog.author}
@@ -26,6 +32,7 @@ const Blog = ({ blog, handleLike }) => {
               like
             </button>{" "}
           </p>
+          <button onClick={removeBlog}>Remove</button>{" "}
         </div>
       )}
     </div>
