@@ -3,13 +3,12 @@ import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 import Notification from "./components/Notification";
-
+import BlogForm from "./components/BlogForm";
+import Togglable from "./components/Togglable";
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [url, setUrl] = useState("");
+
   const [errorMessage, setErrorMessage] = useState(null);
 
   const [username, setUsername] = useState("");
@@ -51,6 +50,11 @@ const App = () => {
       <button type="submit">login</button>
     </form>
   );
+  const blogForm = () => (
+    <Togglable buttonLabel="create new Blog">
+      <BlogForm handleSubmit={newBlog} />
+    </Togglable>
+  );
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -77,42 +81,7 @@ const App = () => {
     window.localStorage.removeItem("loggedBlogappUser");
     window.location.href = window.location.href;
   };
-  const newBlogForm = () => {
-    return (
-      <div>
-        <h2>create new</h2>
-        <form onSubmit={(e) => newBlog(e, title, author, url)}>
-          <div>
-            title:{" "}
-            <input
-              id="title"
-              value={title}
-              onChange={({ target }) => setTitle(target.value)}
-            />
-          </div>
-          <div>
-            author:{" "}
-            <input
-              id="author"
-              value={author}
-              onChange={({ target }) => setAuthor(target.value)}
-            />
-          </div>
-          <div>
-            url:{" "}
-            <input
-              id="url"
-              value={url}
-              onChange={({ target }) => setUrl(target.value)}
-            />
-          </div>
-          <button type="submit" id="create">
-            create
-          </button>
-        </form>
-      </div>
-    );
-  };
+
   const newBlog = async (e, title, author, url) => {
     e.preventDefault();
 
@@ -138,7 +107,7 @@ const App = () => {
         <div>
           Welcome! {user.name}, you are logged in{" "}
           <button onClick={logOut}>Log Out</button>
-          {newBlogForm()}
+          {blogForm()}
           <h2>blogs</h2>
           {blogs.map((blog) => (
             <Blog key={blog.id} blog={blog} />
