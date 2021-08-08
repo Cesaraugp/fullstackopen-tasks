@@ -4,7 +4,6 @@ const BlogForm = ({ handleSubmit }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
-  //(e) => newBlog(e, title, author, url)
   return (
     <div>
       <h2>create new</h2>
