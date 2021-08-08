@@ -81,7 +81,14 @@ const App = () => {
     window.localStorage.removeItem("loggedBlogappUser");
     window.location.href = window.location.href;
   };
-
+  const likeBlog = async (likes, id) => {
+    try {
+      const returnedBlog = await blogService.like({ likes }, id);
+      setBlogs(blogs.map((blog) => (blog.id !== id ? blog : returnedBlog)));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const newBlog = async (e, title, author, url) => {
     e.preventDefault();
 
@@ -110,7 +117,7 @@ const App = () => {
           {blogForm()}
           <h2>blogs</h2>
           {blogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} />
+            <Blog key={blog.id} blog={blog} handleLike={likeBlog} />
           ))}
         </div>
       )}

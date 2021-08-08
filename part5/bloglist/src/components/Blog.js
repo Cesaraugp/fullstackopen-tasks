@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const Blog = ({ blog }) => {
+const Blog = ({ blog, handleLike }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -22,7 +22,9 @@ const Blog = ({ blog }) => {
           <p>
             Likes:
             {blog.likes}
-            <button>like</button>{" "}
+            <button onClick={() => handleLike(blog.likes + 1, blog.id)}>
+              like
+            </button>{" "}
           </p>
         </div>
       )}
