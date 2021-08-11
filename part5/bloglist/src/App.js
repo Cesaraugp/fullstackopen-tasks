@@ -65,10 +65,9 @@ const App = () => {
         username,
         password,
       });
-      console.log(user);
+    
       window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
       blogService.setToken(user.token);
-      console.log(user.token);
       setUser(user);
       setUsername("");
       setPassword("");
@@ -81,7 +80,7 @@ const App = () => {
   };
   const logOut = () => {
     window.localStorage.removeItem("loggedBlogappUser");
-    window.location.href = window.location.href;
+    window.location.href =`${window.location.href}`; //No-self assigned vars
   };
   const likeBlog = async (likes, id) => {
     try {
@@ -102,7 +101,7 @@ const App = () => {
 
   const removeBlog = async (id) => {
     try {
-      const response = await blogService.remove(id);
+      await blogService.remove(id);
       setBlogs(
         blogs.filter((blog) => blog.id !== id).sort((a, b) => b.likes - a.likes)
       );

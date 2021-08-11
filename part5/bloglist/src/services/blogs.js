@@ -44,5 +44,5 @@ const remove = async (blogId) => {
 
   return response.data;
 };
-
-export default { getAll, setToken, create, like, remove };
+const blogService={getAll, setToken, create, like, remove}
+export default blogService;
