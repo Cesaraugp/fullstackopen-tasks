@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 const BlogForm = ({ handleSubmit }) => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [url, setUrl] = useState('');
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
   return (
     <div>
       <h2>create new</h2>
       <form onSubmit={(e) => handleSubmit(e, title, author, url)}>
         <div>
-          title:{" "}
+          title:{' '}
           <input
             id="title"
             value={title}
@@ -18,7 +18,7 @@ const BlogForm = ({ handleSubmit }) => {
           />
         </div>
         <div>
-          author:{" "}
+          author:{' '}
           <input
             id="author"
             value={author}
@@ -26,7 +26,7 @@ const BlogForm = ({ handleSubmit }) => {
           />
         </div>
         <div>
-          url:{" "}
+          url:{' '}
           <input
             id="url"
             value={url}
@@ -38,11 +38,11 @@ const BlogForm = ({ handleSubmit }) => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
 
 BlogForm.propTypes={
   handleSubmit:PropTypes.func.isRequired
 }
-export default BlogForm;
+export default BlogForm

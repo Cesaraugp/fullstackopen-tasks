@@ -1,9 +1,11 @@
-const axios = require("axios");
-const baseUrl = "/api/login";
+import axios from 'axios'
+const baseUrl = '/api/login'
 
 const login = async (credentials) => {
-  const result = await axios.post(baseUrl, credentials);
-  return result.data;
-};
+  const result = await axios.post(baseUrl, credentials)
+  return result.data
+}
 
-module.exports = { login };
+const loginService={ login }
+
+export default loginService

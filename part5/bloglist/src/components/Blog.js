@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 const Blog = ({ blog, handleLike, handleRemove }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
-    border: "solid",
+    border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
-  };
+  }
 
-  const [allInfoVisible, setAllInfoVisible] = useState(false);
-  const toggleVisible = () => setAllInfoVisible(!allInfoVisible);
+  const [allInfoVisible, setAllInfoVisible] = useState(false)
+  const toggleVisible = () => setAllInfoVisible(!allInfoVisible)
   const removeBlog = () => {
     if (window.confirm(`Remove Blog ${blog.title} by ${blog.author}`)) {
-      handleRemove(blog.id);
+      handleRemove(blog.id)
     }
-  };
+  }
   return (
     <div style={blogStyle}>
       {blog.title} - {blog.author}
       <button onClick={toggleVisible}>
-        {allInfoVisible ? "Hide" : "View"}
+        {allInfoVisible ? 'Hide' : 'View'}
       </button>
       {allInfoVisible && (
         <div>
@@ -30,13 +30,13 @@ const Blog = ({ blog, handleLike, handleRemove }) => {
             {blog.likes}
             <button onClick={() => handleLike(blog.likes + 1, blog.id)}>
               like
-            </button>{" "}
+            </button>{' '}
           </p>
-          <button onClick={removeBlog}>Remove</button>{" "}
+          <button onClick={removeBlog}>Remove</button>{' '}
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Blog;
+export default Blog
