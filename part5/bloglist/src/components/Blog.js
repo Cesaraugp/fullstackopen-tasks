@@ -24,8 +24,8 @@ const Blog = ({ blog, handleLike, handleRemove }) => {
       </button>
       {allInfoVisible && (
         <div>
-          <p>{blog.url} </p>
-          <p>
+          <p class='blogUrl'>{blog.url} </p>
+          <p class='blogLikes'>
             Likes:
             {blog.likes}
             <button onClick={() => handleLike(blog.likes + 1, blog.id)}>
