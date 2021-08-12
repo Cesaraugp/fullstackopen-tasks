@@ -8,7 +8,7 @@ const BlogForm = ({ handleSubmit }) => {
   return (
     <div>
       <h2>create new</h2>
-      <form onSubmit={(e) => handleSubmit(e, title, author, url)}>
+      <form className='form' onSubmit={(e) => handleSubmit(e, title, author, url)}>
         <div>
           title:{' '}
           <input
