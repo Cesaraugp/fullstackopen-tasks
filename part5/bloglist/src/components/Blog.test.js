@@ -4,6 +4,7 @@ import {render} from '@testing-library/react'
 import Blog from './Blog'
 import {fireEvent} from '@testing-library/dom'
 
+let mockFn
 let component
 beforeEach(() => {
 
@@ -14,7 +15,9 @@ beforeEach(() => {
         likes:5
     }
 
-   component= render(<Blog blog={blog} />) 
+    mockFn=jest.fn()
+
+   component= render(<Blog blog={blog} handleLike={mockFn}/>) 
   })
 
 
@@ -46,6 +49,24 @@ describe('Button click events',()=>{
         expect(urlDiv).toHaveTextContent('urlhere')
         expect(likesDiv).toBeDefined()
         expect(likesDiv).toHaveTextContent('5')
+    })
+    test ('like Button is defined and clicked twice',()=>{
+        const showButton=component.container.querySelector('.showHideButton')
+        fireEvent.click(showButton)
+        
+        const likesButton=   component.getByText('like')
+        fireEvent.click(likesButton)
+        fireEvent.click(likesButton)
+
+        const likesDiv=component.container.querySelector('.blogLikes')
+        expect(mockFn.mock.calls).toHaveLength(2)
+        //component.container.querySelector('.likeButton')
+        //component.container.querySelector('.blogLikes');
+       // likesDiv.debug()
+        //const likesButton=likesDiv.container.querySelector('.likeButton')
+ 
+        //expect(likesButton).toBeDefined()
+        
     })
 })
 
