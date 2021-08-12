@@ -19,13 +19,13 @@ const Blog = ({ blog, handleLike, handleRemove }) => {
   return (
     <div style={blogStyle}>
       {blog.title} - {blog.author}
-      <button onClick={toggleVisible}>
+      <button className='showHideButton' onClick={toggleVisible}>
         {allInfoVisible ? 'Hide' : 'View'}
       </button>
       {allInfoVisible && (
         <div>
-          <p class='blogUrl'>{blog.url} </p>
-          <p class='blogLikes'>
+          <p className='blogUrl'>{blog.url} </p>
+          <p className='blogLikes'>
             Likes:
             {blog.likes}
             <button onClick={() => handleLike(blog.likes + 1, blog.id)}>

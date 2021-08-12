@@ -30,6 +30,23 @@ describe('Rendering content',()=>{
         const likesDiv=component.container.querySelector('.blogLikes')
         expect(likesDiv).toBeNull()
     })
+
+
+})
+
+describe('Button click events',()=>{
+    test ('Url and likes are shown when the show button is clicked',()=>{
+        const showButton=component.container.querySelector('.showHideButton')
+        fireEvent.click(showButton)
+
+        const urlDiv=component.container.querySelector('.blogUrl')
+        const likesDiv=component.container.querySelector('.blogLikes')
+
+        expect(urlDiv).toBeDefined()
+        expect(urlDiv).toHaveTextContent('urlhere')
+        expect(likesDiv).toBeDefined()
+        expect(likesDiv).toHaveTextContent('5')
+    })
 })
 
 
