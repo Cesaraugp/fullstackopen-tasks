@@ -1,3 +1,12 @@
+Cypress.Commands.add('login', ({ username, password }) => {
+    cy.request('POST', 'http://localhost:3003/api/login', {
+      username, password
+    }).then(({ body }) => {
+      localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
+      cy.visit('http://localhost:3000')
+    })
+  })
+
 describe('Blog app', function() {
     beforeEach(function() {
       cy.request('POST', 'http://localhost:3003/api/testing/reset')
@@ -32,5 +41,27 @@ describe('Blog app', function() {
             //cy.contains('Welcome! cesar perez, you are logged in')
           })
     })
+
+    describe('When logged in', function() {
+        beforeEach(function() {
+          //cy.login({username:'cesar',password:'password'})
+          cy.get('#username').type('cesar')
+            cy.get('#password').type('password')
+            cy.get('#login-button').click()
+        })
+    
+        it('A blog can be created', function() {
+          cy.get('#new-blog-btn').click()
+          cy.get('#title').type('blogCreatedFromcypress')
+          cy.get('#author').type('Vin Diesel')
+          cy.get('#url').type('http.com')
+          cy.get('#create').click()
+          cy.contains('blogCreatedFromcypress - Vin Diesel')
+          cy.get('.message')
+          .should('contain','a new Blog blogCreatedFromcypress by Vin Diesel')
+          .should('have.css','color','rgb(0, 128, 0)')
+          .should('have.css', 'border-style', 'solid')
+        })
+      })
 
   })
