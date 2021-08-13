@@ -80,7 +80,7 @@ const App = () => {
       setPassword("");
     } catch (exception) {
       console.log(exception);
-      setErrorMessage("Wrong Credentials");
+      setErrorMessage("error: Wrong Credentials");
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
@@ -88,7 +88,7 @@ const App = () => {
   };
 
   const noteForm = () => (
-    <Togglable buttonLabel="new note" ref={noteformRef}>
+    <Togglable buttonLabel="salchicha" ref={noteformRef}>
       <NoteForm createNote={addNote} />
     </Togglable>
   );
