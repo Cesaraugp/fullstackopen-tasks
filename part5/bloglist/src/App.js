@@ -30,7 +30,7 @@ const App = () => {
   }, [])
 
   const loginForm = () => (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} id='login-form'>
       <div>
         username
         <input
