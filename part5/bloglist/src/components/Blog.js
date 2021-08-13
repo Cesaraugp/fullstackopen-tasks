@@ -32,7 +32,7 @@ const Blog = ({ blog, handleLike, handleRemove }) => {
               like
             </button>{' '}
           </p>
-          <button onClick={removeBlog}>Remove</button>{' '}
+          <button className="remove-blog" onClick={removeBlog}>Remove</button>{' '}
         </div>
       )}
     </div>
