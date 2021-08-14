@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "dev": "npx nodemon index.js",
+    "start:test": "npx nodemon index.js"
   },
   "keywords": [],
   "author": "",
