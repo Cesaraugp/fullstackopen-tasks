@@ -6,10 +6,12 @@ import reducer from './reducer/reducer'
 const store = createStore(reducer)
 
 const App = () => {
-  const good = () => store.dispatch({type: 'GOOD'})
-  const bad = () =>store.dispatch({type: 'BAD'})
-  const reset=()=> store.dispatch({type:'ZERO'})
-  const neutral=()=> store.dispatch({type:'OK'})
+  const good = () => {
+    store.dispatch({
+      type: 'GOOD'
+    })
+  }
+
   return (
     <div>
       <button onClick={good}>good</button> 
