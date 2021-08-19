@@ -24,6 +24,23 @@ const noteReducer = (state = initialState, action) => {
 };
 export default noteReducer;
 
+export const filterReducer = (state = "ALL", action) => {
+  console.log("FILTERED TO: ", action.filter);
+  switch (action.type) {
+    case "SET_FILTER":
+      return action.filter;
+    default:
+      return state;
+  }
+};
+
+export const filterChange = (filter) => {
+  return {
+    type: "SET_FILTER",
+    filter,
+  };
+};
+
 export const createNote = (content, important = false) => {
   return {
     type: "NEW_NOTE",
