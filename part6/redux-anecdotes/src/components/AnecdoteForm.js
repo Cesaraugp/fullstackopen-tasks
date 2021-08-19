@@ -6,7 +6,7 @@ import {
   cleanNotification,
 } from "../reducers/anecdoteReducer";
 
-export const AnecdoteForm = () => {
+const AnecdoteForm = () => {
   const dispatch = useDispatch();
 
   const addAnecdote = (event) => {
@@ -32,3 +32,5 @@ export const AnecdoteForm = () => {
     </>
   );
 };
+
+export default AnecdoteForm;

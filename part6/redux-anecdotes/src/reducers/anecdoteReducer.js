@@ -34,6 +34,32 @@ export const voteAnecdote = (id) => {
   };
 };
 
+const initialAnecdotesState = anecdotesAtStart.map(asObject);
+
+const anecdotesReducer = (state = initialAnecdotesState, action) => {
+  switch (action.type) {
+    case "VOTE_ANECDOTE":
+      const { id } = action.data;
+      const anecdoteToChange = state.find((anecdote) => anecdote.id === id);
+      const { votes } = anecdoteToChange;
+      anecdoteToChange.votes = Number(votes) + 1;
+      const newState = state.map((anecdote) =>
+        anecdote.id !== id ? anecdote : anecdoteToChange
+      );
+
+      return newState;
+
+    case "ADD_ANECDOTE":
+      const anecdote = action.data;
+      anecdote.id = getId();
+
+      return state.concat(anecdote);
+
+    default:
+      return state;
+  }
+};
+/**NOTIFICATION Reducer */
 const messages = [
   {
     message: "",
@@ -59,6 +85,7 @@ export const votedAnecdoteNotification = (anecdote) => {
     data: { anecdote },
   };
 };
+
 export const cleanNotification = () => {
   return {
     type: "CLEAN",
@@ -105,31 +132,23 @@ export const messagesReducer = (state = messages, action) => {
       return state;
   }
 };
+/**NOTIFICATION Reducer */
 
-const initialState = anecdotesAtStart.map(asObject);
-
-const anecdotesReducer = (state = initialState, action) => {
+export const filterReducer = (state = "", action) => {
+  console.log("FILTERED TO: ", action.filter);
   switch (action.type) {
-    case "VOTE_ANECDOTE":
-      const { id } = action.data;
-      const anecdoteToChange = state.find((anecdote) => anecdote.id === id);
-      const { votes } = anecdoteToChange;
-      anecdoteToChange.votes = Number(votes) + 1;
-      const newState = state.map((anecdote) =>
-        anecdote.id !== id ? anecdote : anecdoteToChange
-      );
-
-      return newState;
-
-    case "ADD_ANECDOTE":
-      const anecdote = action.data;
-      anecdote.id = getId();
-
-      return state.concat(anecdote);
-
+    case "SET_FILTER":
+      return action.filter;
     default:
       return state;
   }
+};
+
+export const filterChange = (filter) => {
+  return {
+    type: "SET_FILTER",
+    filter,
+  };
 };
 
 export default anecdotesReducer;

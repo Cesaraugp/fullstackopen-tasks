@@ -27,15 +27,21 @@ const Anecdote = ({ anecdote }) => {
   );
 };
 
-export const AnecdoteList = () => {
+const AnecdoteList = () => {
+  const state = useSelector((state) => state.filter);
   const anecdotes = useSelector((state) => state.anecdotes);
   return (
     <>
       {anecdotes
         .sort((a, b) => b.votes - a.votes)
+        .filter((anecdote) =>
+          state !== "" && anecdote ? anecdote.content.includes(state) : true
+        )
         .map((anecdote) => (
           <Anecdote key={anecdote.id} anecdote={anecdote} />
         ))}
     </>
   );
 };
+
+export default AnecdoteList;
