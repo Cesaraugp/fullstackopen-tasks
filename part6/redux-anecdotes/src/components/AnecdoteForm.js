@@ -1,11 +1,10 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { createAnecdote } from "../reducers/anecdoteReducer";
 import {
-  createAnecdote,
   newAnecdoteNotification,
   cleanNotification,
-} from "../reducers/anecdoteReducer";
-
+} from "../reducers/notificationsReducer";
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
 

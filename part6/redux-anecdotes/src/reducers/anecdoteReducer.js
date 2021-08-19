@@ -6,7 +6,6 @@ const anecdotesAtStart = [
   "Premature optimization is the root of all evil.",
   "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
 ];
-
 const getId = () => (100000 * Math.random()).toFixed(0);
 
 const asObject = (anecdote) => {
@@ -16,6 +15,8 @@ const asObject = (anecdote) => {
     votes: 0,
   };
 };
+
+const initialAnecdotesState = anecdotesAtStart.map(asObject);
 
 export const createAnecdote = (content) => {
   return {
@@ -33,8 +34,6 @@ export const voteAnecdote = (id) => {
     data: { id },
   };
 };
-
-const initialAnecdotesState = anecdotesAtStart.map(asObject);
 
 const anecdotesReducer = (state = initialAnecdotesState, action) => {
   switch (action.type) {
@@ -58,97 +57,6 @@ const anecdotesReducer = (state = initialAnecdotesState, action) => {
     default:
       return state;
   }
-};
-/**NOTIFICATION Reducer */
-const messages = [
-  {
-    message: "",
-    type: "NEW",
-    active: false,
-  },
-  {
-    message: "",
-    type: "VOTED",
-    active: false,
-  },
-];
-export const newAnecdoteNotification = (anecdote) => {
-  return {
-    type: "NEW",
-    data: { anecdote },
-  };
-};
-
-export const votedAnecdoteNotification = (anecdote) => {
-  return {
-    type: "VOTED",
-    data: { anecdote },
-  };
-};
-
-export const cleanNotification = () => {
-  return {
-    type: "CLEAN",
-  };
-};
-
-export const messagesReducer = (state = messages, action) => {
-  switch (action.type) {
-    case "NEW":
-      const newanecdote = action.data.anecdote;
-      const [newStateMessage] = state.filter((msg) => msg.type === "NEW");
-      const newmessage = `A new anecdote "${newanecdote}" has been created`;
-      const newState = state
-        .filter((msg) => msg.type !== "NEW")
-        .map((msg) => ({ ...msg, active: false }));
-      return [
-        ...newState,
-        {
-          ...newStateMessage,
-          message: newmessage,
-          active: true,
-        },
-      ];
-    case "VOTED":
-      const voteanecdote = action.data.anecdote;
-      const [votedStateMessage] = state.filter((msg) => msg.type === "VOTED");
-      votedStateMessage.active = true;
-      const votemessage = `The anecdote: "${voteanecdote}" has been voted`;
-      const newStateVote = state
-        .filter((msg) => msg.type !== "VOTED")
-        .map((msg) => ({ ...msg, active: false }));
-      return [
-        ...newStateVote,
-        {
-          ...votedStateMessage,
-          message: votemessage,
-          active: true,
-        },
-      ];
-    case "CLEAN":
-      return state.map((msg) => ({ ...msg, message: "", active: false }));
-
-    default:
-      return state;
-  }
-};
-/**NOTIFICATION Reducer */
-
-export const filterReducer = (state = "", action) => {
-  console.log("FILTERED TO: ", action.filter);
-  switch (action.type) {
-    case "SET_FILTER":
-      return action.filter;
-    default:
-      return state;
-  }
-};
-
-export const filterChange = (filter) => {
-  return {
-    type: "SET_FILTER",
-    filter,
-  };
 };
 
 export default anecdotesReducer;

@@ -1,9 +1,9 @@
 import React from "react";
+import { voteAnecdote } from "../reducers/anecdoteReducer";
 import {
-  voteAnecdote,
   votedAnecdoteNotification,
   cleanNotification,
-} from "../reducers/anecdoteReducer";
+} from "../reducers/notificationsReducer";
 import { useSelector, useDispatch } from "react-redux";
 
 const Anecdote = ({ anecdote }) => {

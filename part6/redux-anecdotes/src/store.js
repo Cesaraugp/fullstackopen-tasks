@@ -1,7 +1,6 @@
-import anecdotesReducer, {
-  messagesReducer,
-  filterReducer,
-} from "./reducers/anecdoteReducer";
+import anecdotesReducer from "./reducers/anecdoteReducer";
+import messagesReducer from "./reducers/notificationsReducer";
+import filterReducer from "./reducers/filterReducer";
 import { createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
