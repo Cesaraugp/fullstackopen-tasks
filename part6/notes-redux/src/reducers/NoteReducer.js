@@ -1,11 +1,18 @@
-const generateId = () => Math.floor(Math.random() * 1000000);
-
-const initialState = [
+/* const generateId = () => Math.floor(Math.random() * 1000000);
+ */
+/* const initialState = [
   { content: "Family", important: true, id: generateId() },
   { content: "Beans and mayo", important: false, id: generateId() },
-];
+]; */
 
-const noteReducer = (state = initialState, action) => {
+export const initializeNotes = (notes) => {
+  return {
+    type: "INIT_NOTES",
+    data: notes,
+  };
+};
+
+const noteReducer = (state = [], action) => {
   switch (action.type) {
     case "NEW_NOTE":
       return [...state, action.data];
@@ -18,6 +25,8 @@ const noteReducer = (state = initialState, action) => {
       return state.map((note) =>
         note.id !== action.data.id ? note : changedNote
       );
+    case "INIT_NOTES":
+      return action.data;
     default:
       return state;
   }
@@ -41,14 +50,10 @@ export const filterChange = (filter) => {
   };
 };
 
-export const createNote = (content, important = false) => {
+export const createNote = (data) => {
   return {
     type: "NEW_NOTE",
-    data: {
-      content,
-      important,
-      id: generateId(),
-    },
+    data,
   };
 };
 export const toggleImportance = (id) => {
