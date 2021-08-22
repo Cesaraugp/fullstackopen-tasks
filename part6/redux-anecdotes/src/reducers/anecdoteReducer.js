@@ -12,9 +12,12 @@ export const initializeAnecdotes = () => {
 };
 
 export const createAnecdote = (content) => {
-  return {
-    type: "ADD_ANECDOTE",
-    data: content,
+  return async (dispatch) => {
+    const newAnecdote = anecdotesService.createNew(content);
+    dispatch({
+      type: "ADD_ANECDOTE",
+      data: newAnecdote,
+    });
   };
 };
 
