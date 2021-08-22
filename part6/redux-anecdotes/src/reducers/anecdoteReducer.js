@@ -13,7 +13,7 @@ export const initializeAnecdotes = () => {
 
 export const createAnecdote = (content) => {
   return async (dispatch) => {
-    const newAnecdote = anecdotesService.createNew(content);
+    const newAnecdote = await anecdotesService.createNew(content);
     dispatch({
       type: "ADD_ANECDOTE",
       data: newAnecdote,
@@ -46,8 +46,6 @@ const anecdotesReducer = (state = [], action) => {
 
     case "ADD_ANECDOTE":
       const anecdote = action.data;
-      anecdote.id = getId();
-
       return state.concat(anecdote);
     case "INIT_ANECDOTES":
       return action.data;

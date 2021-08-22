@@ -10,17 +10,29 @@ const initialState = [
     active: false,
   },
 ];
-export const newAnecdoteNotification = (anecdote) => {
-  return {
-    type: "NEW",
-    data: { anecdote },
+export const newAnecdoteNotification = (anecdote, time) => {
+  return async (dispatch) => {
+    dispatch({
+      type: "NEW",
+      data: { anecdote },
+    });
+    const prom = await new Promise((resolve) =>
+      setTimeout(() => resolve(), time * 1000)
+    );
+    dispatch(cleanNotification());
   };
 };
 
-export const votedAnecdoteNotification = (anecdote) => {
-  return {
-    type: "VOTED",
-    data: { anecdote },
+export const votedAnecdoteNotification = (anecdote, time) => {
+  return async (dispatch) => {
+    dispatch({
+      type: "VOTED",
+      data: { anecdote },
+    });
+    const prom = await new Promise((resolve) =>
+      setTimeout(() => resolve(), time * 1000)
+    );
+    dispatch(cleanNotification());
   };
 };
 

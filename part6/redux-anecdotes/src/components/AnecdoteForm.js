@@ -13,11 +13,8 @@ const AnecdoteForm = () => {
     event.preventDefault();
     const content = event.target.content.value;
     dispatch(createAnecdote(content));
+    dispatch(newAnecdoteNotification(content, 3));
     event.target.content.value = "";
-    dispatch(newAnecdoteNotification(content));
-    setTimeout(() => {
-      dispatch(cleanNotification());
-    }, 5000);
   };
 
   return (
