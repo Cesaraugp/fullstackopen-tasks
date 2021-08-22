@@ -13,5 +13,11 @@ const createNew = async (content) => {
   return response.data;
 };
 
-const noteService = { getAll, createNew };
+const vote = async (id, votes) => {
+  const object = { votes };
+  const response = await axios.patch(`${baseUrl}/${id}`, object);
+  return response.data;
+};
+
+const noteService = { getAll, createNew, vote };
 export default noteService;
