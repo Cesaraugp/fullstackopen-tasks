@@ -1,15 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { createNote } from "../reducers/NoteReducer";
-import noteService from "../services/notes";
+import { connect } from "react-redux";
 
 const NewNote = (props) => {
-  const dispatch = useDispatch();
-
   const addNote = async (event) => {
     event.preventDefault();
     const content = event.target.note.value;
-    dispatch(createNote(content));
+    props.createNote(content);
     event.target.note.value = "";
   };
 
@@ -21,4 +18,4 @@ const NewNote = (props) => {
   );
 };
 
-export default NewNote;
+export default connect(null, { createNote })(NewNote);
