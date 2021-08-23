@@ -1,11 +1,10 @@
-import { useFilter } from "../hooks/useFilter";
+import { connect } from "react-redux";
 import { filterChange } from "../reducers/filterReducer";
 
-const AnecdoteFilter = () => {
-  const [setFilter] = useFilter();
+const AnecdoteFilter = (props) => {
   const handleChange = (e) => {
     const value = e.target.value;
-    setFilter(filterChange(value));
+    props.filterChange(value);
   };
   return (
     <div>
@@ -14,4 +13,4 @@ const AnecdoteFilter = () => {
   );
 };
 
-export default AnecdoteFilter;
+export default connect(null, { filterChange })(AnecdoteFilter);
