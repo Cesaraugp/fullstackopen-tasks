@@ -10,6 +10,8 @@ const initialState = [
     active: false,
   },
 ];
+let timeoutID;
+
 export const newAnecdoteNotification = (anecdote, time) => {
   return async (dispatch) => {
     dispatch({
@@ -24,15 +26,19 @@ export const newAnecdoteNotification = (anecdote, time) => {
 };
 
 export const votedAnecdoteNotification = (anecdote, time) => {
+  clearTimeout(timeoutID);
   return async (dispatch) => {
     dispatch({
       type: "VOTED",
       data: { anecdote },
     });
-    const prom = await new Promise((resolve) =>
-      setTimeout(() => resolve(), time * 1000)
+    const prom = await new Promise(
+      (resolve) =>
+        (timeoutID = setTimeout(
+          () => dispatch(cleanNotification()),
+          time * 1000
+        ))
     );
-    dispatch(cleanNotification());
   };
 };
 
