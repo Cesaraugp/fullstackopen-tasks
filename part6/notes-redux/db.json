@@ -1,0 +1,34 @@
+{
+  "notes": [
+    {
+      "content": "the app state is in redux store",
+      "important": true,
+      "id": 1
+    },
+    {
+      "content": "state changes are made with actions",
+      "important": false,
+      "id": 2
+    },
+    {
+      "content": "New note",
+      "important": false,
+      "id": 3
+    },
+    {
+      "content": "skr",
+      "important": false,
+      "id": 4
+    },
+    {
+      "content": "ccc",
+      "important": false,
+      "id": 5
+    },
+    {
+      "content": "ddd",
+      "important": false,
+      "id": 6
+    }
+  ]
+}
