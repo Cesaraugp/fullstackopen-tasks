@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -86,7 +86,9 @@ const Footer = () => (
     for the source code.
   </div>
 );
-
+const Notification = ({ content }) => (
+  <p>a new anecdote: "{content}" created!</p>
+);
 const CreateNew = (props) => {
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
@@ -153,12 +155,20 @@ const App = () => {
       id: "2",
     },
   ]);
-
   const [notification, setNotification] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setNotification("");
+    }, 10000);
+
+    return () => {};
+  }, [notification]);
 
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0);
     setAnecdotes(anecdotes.concat(anecdote));
+    setNotification(anecdote.content);
   };
 
   const anecdoteById = (id) => anecdotes.find((a) => a.id === id);
@@ -184,10 +194,11 @@ const App = () => {
   return (
     <div>
       <h1>Software anecdotes</h1>
+      {notification ? <Notification content={notification} /> : <></>}
       <Menu />
       <Switch>
         <Route path="/new">
-          <CreateNew addNew={addNew} />
+          {notification ? <Redirect to="/" /> : <CreateNew addNew={addNew} />}
         </Route>
 
         <Route path="/about">
