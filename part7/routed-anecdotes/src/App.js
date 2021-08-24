@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,6 +10,8 @@ import {
   useHistory,
   useRouteMatch,
 } from "react-router-dom";
+import { useField } from "./hooks";
+
 const Menu = () => {
   const padding = {
     paddingRight: 5,
@@ -90,18 +93,24 @@ const Notification = ({ content }) => (
   <p>a new anecdote: "{content}" created!</p>
 );
 const CreateNew = (props) => {
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-  const [info, setInfo] = useState("");
+  const { clear: clearContent, ...content } = useField("text", "content");
+  const { clear: clearAuthor, ...author } = useField("text", "author");
+  const { clear: clearInfo, ...info } = useField("text", "info");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     props.addNew({
-      content,
-      author,
-      info,
+      content: content.value,
+      author: author.value,
+      info: info.value,
       votes: 0,
     });
+  };
+
+  const clearAllInputs = () => {
+    clearAuthor();
+    clearContent();
+    clearInfo();
   };
 
   return (
@@ -110,29 +119,20 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          <input {...content} />
         </div>
         <div>
           author
-          <input
-            name="author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
+          <input {...author} />
         </div>
         <div>
           url for more info
-          <input
-            name="info"
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
-          />
+          <input {...info} />
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
+        <button style={{ display: "inline" }} onClick={() => clearAllInputs()}>
+          clear
+        </button>
       </form>
     </div>
   );
@@ -190,7 +190,6 @@ const App = () => {
         (anecdote) => Number(anecdote.id) === Number(match.params.id)
       )
     : null;
-  console.log(match);
   return (
     <div>
       <h1>Software anecdotes</h1>
