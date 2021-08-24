@@ -7,6 +7,7 @@ import {
   Redirect,
   useParams,
   useHistory,
+  useRouteMatch,
 } from "react-router-dom";
 const Menu = () => {
   const padding = {
@@ -32,12 +33,24 @@ const AnecdoteList = ({ anecdotes }) => (
     <h2>Anecdotes</h2>
     <ul>
       {anecdotes.map((anecdote) => (
-        <li key={anecdote.id}>{anecdote.content}</li>
+        <li key={anecdote.id}>
+          <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
+        </li>
       ))}
     </ul>
   </div>
 );
 
+const Anecdote = ({ anecdote }) => (
+  <div>
+    <h3>{anecdote.content}</h3>
+    <h4> By {anecdote.author}</h4>
+    <p>
+      <strong>votes: </strong>
+      {anecdote.votes}
+    </p>
+  </div>
+);
 const About = () => (
   <div>
     <h2>About anecdote app</h2>
@@ -161,6 +174,13 @@ const App = () => {
     setAnecdotes(anecdotes.map((a) => (a.id === id ? voted : a)));
   };
 
+  const match = useRouteMatch("/anecdotes/:id");
+  const anecdote = match
+    ? anecdotes.find(
+        (anecdote) => Number(anecdote.id) === Number(match.params.id)
+      )
+    : null;
+  console.log(match);
   return (
     <div>
       <h1>Software anecdotes</h1>
@@ -172,6 +192,10 @@ const App = () => {
 
         <Route path="/about">
           <About />
+        </Route>
+
+        <Route path="/anecdotes/:id">
+          <Anecdote anecdote={anecdote} />
         </Route>
         <Route path="/">
           <AnecdoteList anecdotes={anecdotes} />
