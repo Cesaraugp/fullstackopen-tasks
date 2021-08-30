@@ -2,7 +2,7 @@ import React from "react";
 import SingleCountry from "./SingleCountry.js";
 import DetailedSingleCountry from "./DetailedSingleCountry";
 
-let Countries = ({ countries, country, buttonHandler }) => {
+let Countries = ({ countries, country, setCountry }) => {
   let matchingList;
 
   if (/\d/.test(country)) {
@@ -47,7 +47,7 @@ let Countries = ({ countries, country, buttonHandler }) => {
           if (i <= 10) {
             return (
               <SingleCountry
-                handler={buttonHandler}
+                handler={setCountry}
                 key={country.name}
                 name={country.name}
               />
