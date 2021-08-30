@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { Form, Button } from "react-bootstrap";
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  Redirect,
   useParams,
+  Redirect,
   useHistory,
 } from "react-router-dom";
 
@@ -78,21 +79,23 @@ const Login = (props) => {
   return (
     <div>
       <h2>login</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          username: <input />
-        </div>
-        <div>
-          password: <input type="password" />
-        </div>
-        <button type="submit">login</button>
-      </form>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>username:</Form.Label>
+          <Form.Control type="text" name="username" />
+          <Form.Label>password:</Form.Label>
+          <Form.Control type="password" />
+          <Button variant="primary" type="submit">
+            login
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
   );
 };
 
 const App = () => {
-  const [notes, setNotes] = useState([
+  const [notes] = useState([
     {
       id: 1,
       content: "HTML is easy",
@@ -124,7 +127,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <Router>
         <div>
           <Link style={padding} to="/">
