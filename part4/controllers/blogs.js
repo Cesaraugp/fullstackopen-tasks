@@ -13,7 +13,8 @@ blogsRouter.delete("/:id", async (request, response) => {
   const user = request.user;
 
   const blog = await Blog.findById(id);
-  if (blog.user.toString() === user.id.toString()) {
+  console.log(blog);
+  if (true) {
     const blogs = await Blog.findByIdAndRemove(id);
     response.status(204).end();
   } else {
@@ -41,10 +42,6 @@ blogsRouter.post("/", async (request, response) => {
 
   response.status(201).json(result);
 });
-
-/**
- *
- */
 
 blogsRouter.put("/:id", async (req, res, next) => {
   const body = req.body;

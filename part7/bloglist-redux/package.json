@@ -1,27 +1,29 @@
 {
-  "name": "notes-redux",
+  "name": "bloglist-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.6.3",
     "axios": "^0.21.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "4.0.1",
     "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch db.json"
+    "eslint": "eslint .",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -41,8 +43,9 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "http://localhost:3003",
   "devDependencies": {
-    "json-server": "^0.16.3",
-    "redux-devtools-extension": "^2.13.9"
+    "cypress": "^8.2.0",
+    "eslint-plugin-jest": "^24.4.0"
   }
 }
